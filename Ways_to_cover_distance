@@ -1,0 +1,44 @@
+//the logic behind these types of problem is finding the ways to calculate number of ways to reach position1 
+//then to reach position 2 and so on such that you can make connection btw the previous ways and new way
+//here we are given one can take 1, 2, 3 steps so for reaching 1 there is only 1 way (1)
+//but for reaching 2 there are.....(1,1){adding 1 more step to previous way} and (2){a new step}
+// similarly for reaching position 3 .... (1,2),(1,1) ... (2,1) ..... (3){a new step}
+// now you wont be getting a new type of step. now look for the position 4 types of ways and its relation with previous one 
+
+// you will find that (no. of ways for position4)=(no. of ways for position3)+(no. of ways for position2)+(no. of ways for position1)
+??Lets code now..
+
+// A Dynamic Programming based Java program 
+// to count number of ways to cover a distance 
+// with 1, 2 and 3 steps 
+import java.io.*; 
+
+class Ways_to_cover_distance 
+{ 
+	// Function returns count of ways to cover 'dist' 
+	static int printCountDP(int dist) 
+	{ 
+		int[] count = new int[dist+1]; 
+
+		// Initialize base values. There is one way to 
+		// cover 0 and 1 distances and two ways to 
+		// cover 2 distance 
+		count[0] = 1; 
+		count[1] = 1; 
+		count[2] = 2; 
+
+		// Fill the count array in bottom up manner 
+		for (int i=3; i<=dist; i++) 
+			count[i] = count[i-1] + count[i-2] + count[i-3]; 
+
+		return count[dist]; 
+	} 
+	
+	// MAIN SECTION
+	public static void main (String[] args) 
+	{ 
+		int dist = 4; 
+		System.out.println(printCountDP(dist)); 
+	} 
+} 
+
